@@ -23,8 +23,14 @@ sudo systemctl start docker.service
 
 sudo kubeadm config images pull 
 
+sudo docker pull k8s.gcr.io/coredns:1.6.5
+sudo docker pull docker.io/weaveworks/weave-npc:2.6.0
+
 sudo kubeadm init
   
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
