@@ -4,6 +4,31 @@ sudo dphys-swapfile swapoff && \
 sudo dphys-swapfile uninstall && \
 sudo update-rc.d dphys-swapfile remove
 
+sudo cat <<EOF > /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sudo sysctl --system
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+
+# Setup daemon.
+sudo cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
+sudo mkdir -p /etc/systemd/system/docker.service.d
+
+# Restart docker.
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 
 # This installs the base instructions up to the point of joining / creating a cluster
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && \
@@ -13,13 +38,6 @@ sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-ke
   
  # add this line to /boot/cmdline.txt :
  # cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory
-
-sudo curl https://download.docker.com/linux/raspbian/gpg | sudo apt-key add - && \
-  echo "deb https://download.docker.com/linux/raspbian/ stretch stable" | sudo tee /etc/apt/sources.list.d/docker.list && \
-  sudo apt-get update -q && \
-  sudo apt-get install -qy docker
-
-sudo systemctl start docker.service
 
 sudo kubeadm config images pull 
 
