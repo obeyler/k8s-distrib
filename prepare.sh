@@ -11,7 +11,8 @@ EOF
 sudo sysctl --system
 
 curl -fsSL https://get.docker.com -o get-docker.sh
-
+sudo sh get-docker.sh
+sudo mkdir -p /etc/docker
 # Setup daemon.
 sudo cat > /etc/docker/daemon.json <<EOF
 {
