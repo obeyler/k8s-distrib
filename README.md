@@ -73,7 +73,7 @@ EOF
 sudo sysctl --system
 ```
 
-# ajout de kubeadm
+# Ajout de kubeadm, kubelet kubectl
 ```
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
@@ -84,4 +84,7 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
-
+# Usage de kubeadm
+```
+kubeadm init
+```
