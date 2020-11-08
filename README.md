@@ -20,7 +20,7 @@ changer le `/etc/hostname`
 
 # changer l'IP en ip fixe
 rajout du fichier `/etc/netplan/00-installer-config.yaml`
-avec ce contenu pour l'IP 192.168.0.101 par exemple
+avec ce contenu pour l'IP `192.168.0.101` par exemple
 ```
 network:
   ethernets:
