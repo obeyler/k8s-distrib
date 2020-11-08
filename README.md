@@ -15,6 +15,8 @@ installation de l'OS en utilisant le Raspberry Pi Imager sur les differentes car
 - Raspberry Pi Imager for Windows: https://downloads.raspberrypi.org/imager/imager.exe
 - Raspberry Pi Imager for macOS: https://downloads.raspberrypi.org/imager/imager.dmg
 
+Pour se connecter ensuite le login/mot de passe va être ubuntu/ubuntu
+
 # Changer le hostname 
 pour refleter le comportement nous allons changer le nom de chaque machine
 changer le `/etc/hostname`
@@ -38,6 +40,10 @@ rajout du fichier `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg`
 avec ce contenu 
 ```
 {config: disabled}
+```
+# Se faciliter la vie avec le ssh
+```
+ssh-copy-id ubuntu@192.168.0.100
 ```
 # Ajout des cgroup
 à la fin du fichier `/boot/firmware/cmdline.txt`
@@ -88,4 +94,9 @@ sudo apt-mark hold kubelet kubeadm kubectl
 # Usage de kubeadm
 ```
 kubeadm init
+```
+# Ajout de la couche CNI 
+Installation du reseau weavenet:
+```
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 ```
