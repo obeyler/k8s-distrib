@@ -9,13 +9,13 @@ curl -sL https://raw.githubusercontent.com/obeyler/k8s-distrib/master/prepare.sh
 L'usage  de Rapsberry pi au minimum en version 3 ou plus est nécessaire pour être sur de l'ARM64.
 
 # Installation k8s-distrib sur base ubuntu server ARM64
-installation de l'OS en utilisant le Raspberry Pi Imager sur les differentes cartes SD
+installation de l'OS en utilisant le Raspberry Pi Imager sur les differentes cartes SD mon choix va se porter sur l'Ubuntu Server 20.04.1 LTS 64bit (RPi3/4)
 
 - Raspberry Pi Imager as a deb package: https://downloads.raspberrypi.org/imager/imager_amd64.deb
 - Raspberry Pi Imager for Windows: https://downloads.raspberrypi.org/imager/imager.exe
 - Raspberry Pi Imager for macOS: https://downloads.raspberrypi.org/imager/imager.dmg
 
-Pour se connecter ensuite le login/mot de passe va être ubuntu/ubuntu
+Pour se connecter le login/mot de passe par défaut va être ubuntu/ubuntu. Au premier démarage il est demander de le changer.
 
 # Changer le hostname 
 pour refleter le comportement nous allons changer le nom de chaque machine
@@ -45,7 +45,7 @@ avec ce contenu
 ```
 ssh-copy-id ubuntu@192.168.0.100
 ```
-# Ajout des cgroup
+# Ajout des cgroups
 à la fin du fichier `/boot/firmware/cmdline.txt`
 rajouter : `group_enable=cpuset cgroup_enable=memory cgroup_memory=1`
 
