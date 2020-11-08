@@ -6,19 +6,20 @@ This script will install containerd and kubeadmin, disable swap
 ```
 curl -sL https://raw.githubusercontent.com/obeyler/k8s-distrib/master/prepare.sh | sudo sh
 ```
+L'usage  de Rapsberry pi au minimum en version 3 ou plus est nécessaire pour être sur de l'ARM64.
 
-# k8s-distrib sur base ubuntu server ARM64
+# Installation k8s-distrib sur base ubuntu server ARM64
 installation de l'OS en utilisant le Raspberry Pi Imager sur les differentes cartes SD
 
 - Raspberry Pi Imager as a deb package: https://downloads.raspberrypi.org/imager/imager_amd64.deb
 - Raspberry Pi Imager for Windows: https://downloads.raspberrypi.org/imager/imager.exe
 - Raspberry Pi Imager for macOS: https://downloads.raspberrypi.org/imager/imager.dmg
 
-# changer le hostname 
+# Changer le hostname 
 pour refleter le comportement nous allons changer le nom de chaque machine
 changer le `/etc/hostname`
 
-# changer l'IP en ip fixe
+# Changer l'IP en ip fixe
 rajout du fichier `/etc/netplan/00-installer-config.yaml`
 avec ce contenu pour l'IP `192.168.0.101` par exemple
 ```
@@ -38,11 +39,11 @@ avec ce contenu
 ```
 {config: disabled}
 ```
-# ajout des cgroup
+# Ajout des cgroup
 à la fin du fichier `/boot/firmware/cmdline.txt`
 rajouter : `group_enable=cpuset cgroup_enable=memory cgroup_memory=1`
 
-# ajout de docker
+# Ajout de docker
 ```
 sudo -i
 apt-get update && sudo apt-get install -y apt-transport-https curl
