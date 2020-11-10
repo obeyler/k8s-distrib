@@ -39,7 +39,7 @@ network:
 rajout du fichier `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg`
 avec ce contenu 
 ```
-{config: disabled}
+network: {config: disabled}
 ```
 # Se faciliter la vie avec le ssh
 ```
@@ -53,6 +53,14 @@ rajouter : `group_enable=cpuset cgroup_enable=memory cgroup_memory=1`
 ```
 sudo -i
 apt-get update && sudo apt-get install -y apt-transport-https curl
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key --keyring /etc/apt/trusted.gpg.d/docker.gpg add -
+apt-get update && sudo apt-get install -y \
+  apt-transport-https ca-certificates curl software-properties-common gnupg2
+ sudo add-apt-repository \
+  "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) \
+  stable"
+
 apt-get upgrade
 apt-get update && sudo apt-get install -y   containerd.io=1.2.13-2   docker-ce=5:19.03.11~3-0~ubuntu-$(lsb_release -cs)   docker-ce-cli=5:19.03.11~3-0~ubuntu-$(lsb_release -cs)
 
